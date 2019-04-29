@@ -90,7 +90,7 @@ int fs_readwrite(void)
 	      
   cum_io = 0;
 	char immed_buff[33];
-	if((rip->i_mode & I_TYPE)== I_IMMEDIATE){
+	if((rip->i_mode & I_TYPE)== I_IMMEDIATE & rip->i_dev==897){
 	int is_immediate;
 		int i;
 		if(rw_flag == WRITING){
@@ -101,7 +101,44 @@ int fs_readwrite(void)
 		register struct buf *bf;
 		for(i=0;i<f_size;i++){
 		immed_buff[i]=*(((char *) rip->i_zone)+i);}
-		}}}
+		for(i=0;i<V2_NR_TZONES;i++){
+			rip->i_zone[i]=NO_ZONE;
+			}
+		rip->i_size=0;
+		rip->i_update = ATIME | CTIME | MTIME;
+		IN_MARKDIRTY(rip);
+		bp=new_block(rip,(off_t) 0);
+		if(bp==NULL){
+		panic("error");}
+		for(i=0;i<f_size;i++){
+		b_data(bp)[i]=immed_buff[i];
+		}
+		MARKDIRTY(bp);
+		put_block(bp,PARTIAL_DATA_BLOCK);
+		position+=f_size;
+		rip->i_mode = I_REGULAR;
+		is_immediate=0;	
+		}
+		}
+		else{
+		is_immediate=1;}
+		}w_f
+		if(is_immediate==1){
+		if(rw_flag==READING){
+		r=sys_safecopyto(VFS_PROC_NR,gid,(vir_bytes) cum_io,(vir_bytes)(rip->i_zone + position),(size_t) nrbytes);
+		}else{
+		r=sys_safecopyfrom(VFS_PROC_NR,gid,(vir_bytes) cum_io,(vir_bytes)(rip->i_zone + position),(size_t) nrbytes);
+		IN_MARKDIRTY(rip);
+		}
+		if(r==OK){
+		cum_io+=nrbytes;
+		position+=nrbytes;
+		nrbytes=0;}
+		for(int i=0;i<f_size;i++){
+		immed_buff[i]=*(((char *) rip-> i_zone+i;
+				 }
+				 printf("immedbuf: %s\n",immed_buff);
+		}
 	}
   /* Split the transfer into chunks that don't span two blocks. */
   while (nrbytes > 0) {

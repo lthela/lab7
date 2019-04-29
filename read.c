@@ -89,6 +89,20 @@ int fs_readwrite(void)
 		return EROFS;
 	      
   cum_io = 0;
+	char immed_buff[33];
+	if((rip->i_mode & I_TYPE)== I_IMMEDIATE){
+	int is_immediate;
+		int i;
+		if(rw_flag == WRITING){
+		if((f_size + nrbytes ) > 32){
+		if(position == 0 && nrytes <=32){
+		is_immediate=1;
+		}else{
+		register struct buf *bf;
+		for(i=0;i<f_size;i++){
+		immed_buff[i]=*(((char *) rip->i_zone)+i);}
+		}}}
+	}
   /* Split the transfer into chunks that don't span two blocks. */
   while (nrbytes > 0) {
 	  off = ((unsigned int) position) % block_size; /* offset in blk*/

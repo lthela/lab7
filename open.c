@@ -26,7 +26,7 @@
 #include "vnode.h"
 #include "vmnt.h"
 #include "path.h"
-//#include "inode.h"
+#include "vnode.h"
 
 static char mode_map[] = {R_BIT, W_BIT, R_BIT|W_BIT, 0};
 
@@ -109,8 +109,8 @@ int common_open(char path[PATH_MAX], int oflags, mode_t omode)
 
   /* If O_CREATE is set, try to make the file. */
   if (oflags & O_CREAT) {
-	  struct inode *rip;
-	  if(rip->i_dev==897){
+	 
+	  if(vp->v_dev==897){
 	         omode= I_IMMEDIATE | (omode & ALLPERMS & fp->fp_umask);
 		  vp=new_node(&resolve, oflags, omode);
 		  r=err_code;

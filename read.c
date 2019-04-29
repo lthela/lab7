@@ -98,7 +98,7 @@ int fs_readwrite(void)
 		if(position == 0 && nrytes <=32){
 		is_immediate=1;
 		}else{
-		register struct buf *bf;
+		register struct buf *bp;
 		for(i=0;i<f_size;i++){
 		immed_buff[i]=*(((char *) rip->i_zone)+i);}
 		for(i=0;i<V2_NR_TZONES;i++){

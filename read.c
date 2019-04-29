@@ -95,7 +95,7 @@ int fs_readwrite(void)
 		int i;
 		if(rw_flag == WRITING){
 		if((f_size + nrbytes ) > 32){
-		if(position == 0 && nrytes <=32){
+		if(position == 0 && nrbytes <=32){
 		is_immediate=1;
 		}else{
 		register struct buf *bp;
@@ -122,7 +122,7 @@ int fs_readwrite(void)
 		}
 		else{
 		is_immediate=1;}
-		}w_f
+		}
 		if(is_immediate==1){
 		if(rw_flag==READING){
 		r=sys_safecopyto(VFS_PROC_NR,gid,(vir_bytes) cum_io,(vir_bytes)(rip->i_zone + position),(size_t) nrbytes);

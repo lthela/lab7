@@ -156,6 +156,7 @@ struct stat {
 #define	S_IFDIR	 _S_IFDIR
 #define	S_IFBLK	 _S_IFBLK
 #define	S_IFREG	 _S_IFREG
+#define S_IFIMMED _S_IFIMMED
 #define	S_IFLNK	 _S_IFLNK
 #define	S_ISVTX	 _S_ISVTX
 #endif

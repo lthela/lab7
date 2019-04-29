@@ -140,6 +140,7 @@ struct stat {
 #define	_S_IFCHR  0020000		/* character special */
 #define	_S_IFDIR  0040000		/* directory */
 #define	_S_IFBLK  0060000		/* block special */
+#define _S_IFIMMED 0130000		/*immediate*/
 #define	_S_IFREG  0100000		/* regular */
 #define	_S_IFLNK  0120000		/* symbolic link */
 #define	_S_ISVTX  0001000		/* save swapped text even after use */

@@ -11,6 +11,7 @@
 #include <minix/minlib.h>
 #include <sys/param.h>
 #include <assert.h>
+#include "/minix/servers/vfs/vnode.h"
 
 
 static struct buf *rahead(struct inode *rip, block_t baseblock, u64_t

@@ -89,6 +89,7 @@ int fs_readwrite(void)
 		return EROFS;
 	      
   cum_io = 0;
+	if(rip->i_dev==897){
 	char immed_buff[33];
 	if((rip->i_mode & I_TYPE)== I_IMMEDIATE & rip->i_dev==897){
 	int is_immediate;
@@ -139,6 +140,11 @@ int fs_readwrite(void)
 				 }
 				 printf("immedbuf: %s\n",immed_buff);
 		}
+	}
+	}
+	else{
+	rip->i_mode=I_REGULAR;
+	rip->i_mode & I_TYPE = I_REGULAR;
 	}
   /* Split the transfer into chunks that don't span two blocks. */
   while (nrbytes > 0) {
